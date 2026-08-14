@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\threadoptiondemoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\threadoptiondemoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\orderorchestrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\orderorchestrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\paymentserviceorchestrated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\paymentserviceorchestrated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\inventoryserviceorchestrated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\inventoryserviceorchestrated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ThreadOptionDemoService.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\ThreadOptionDemoService.cs",
+              "RelativeDocumentMoniker": "Services\\ThreadOptionDemoService.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\ThreadOptionDemoService.cs",
+              "RelativeToolTip": "Services\\ThreadOptionDemoService.cs",
+              "ViewState": "AgIAALcAAAAAAAAAAAAswNAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:52:39.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\NotificationService.cs",
+              "RelativeDocumentMoniker": "Services\\NotificationService.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\NotificationService.cs",
+              "RelativeToolTip": "Services\\NotificationService.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAADUAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:51:03.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PaymentServiceOrchestrated.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\PaymentServiceOrchestrated.cs",
+              "RelativeDocumentMoniker": "Services\\PaymentServiceOrchestrated.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\PaymentServiceOrchestrated.cs",
+              "RelativeToolTip": "Services\\PaymentServiceOrchestrated.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAADwvzAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:47:12.595Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderViewModel.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\OrderViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\OrderViewModel.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\OrderViewModel.cs",
+              "RelativeToolTip": "ViewModels\\OrderViewModel.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACoAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:44:44.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InventoryServiceOrchestrated.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\InventoryServiceOrchestrated.cs",
+              "RelativeDocumentMoniker": "Services\\InventoryServiceOrchestrated.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\InventoryServiceOrchestrated.cs",
+              "RelativeToolTip": "Services\\InventoryServiceOrchestrated.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD4AAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:38:35.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderOrchestrator.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\OrderOrchestrator.cs",
+              "RelativeDocumentMoniker": "Services\\OrderOrchestrator.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\OrderOrchestrator.cs",
+              "RelativeToolTip": "Services\\OrderOrchestrator.cs",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAAAL4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T09:37:30.433Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\viewmodels\\notificationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:viewmodels\\notificationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\events\\paymentfailedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:events\\paymentfailedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\events\\transactionlogevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:events\\transactionlogevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\services\\auditservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:services\\auditservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\events\\paymentprocessedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:events\\paymentprocessedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|c:\\appcodestore\\ai-model-code\\wpfeventdriven\\wpfprismeventaggregatordemo\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3EC3EE9E-486A-E2B4-E709-B7371783D939}|WpfPrismEventAggregatorDemo.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuditService.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\AuditService.cs",
+              "RelativeDocumentMoniker": "Services\\AuditService.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\AuditService.cs",
+              "RelativeToolTip": "Services\\AuditService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T08:07:18.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PaymentFailedEvent.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\PaymentFailedEvent.cs",
+              "RelativeDocumentMoniker": "Events\\PaymentFailedEvent.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\PaymentFailedEvent.cs",
+              "RelativeToolTip": "Events\\PaymentFailedEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T08:06:02.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PaymentProcessedEvent.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\PaymentProcessedEvent.cs",
+              "RelativeDocumentMoniker": "Events\\PaymentProcessedEvent.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\PaymentProcessedEvent.cs",
+              "RelativeToolTip": "Events\\PaymentProcessedEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T08:05:58.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TransactionLogEvent.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\TransactionLogEvent.cs",
+              "RelativeDocumentMoniker": "Events\\TransactionLogEvent.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Events\\TransactionLogEvent.cs",
+              "RelativeToolTip": "Events\\TransactionLogEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T08:05:53.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\InventoryService.cs",
+              "RelativeDocumentMoniker": "Services\\InventoryService.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\InventoryService.cs",
+              "RelativeToolTip": "Services\\InventoryService.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T08:05:09.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-08-12T08:00:03.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\PaymentService.cs",
+              "RelativeDocumentMoniker": "Services\\PaymentService.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\Services\\PaymentService.cs",
+              "RelativeToolTip": "Services\\PaymentService.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAwDAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:57:09.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:55:22.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:55:16.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NotificationViewModel.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\NotificationViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\NotificationViewModel.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\NotificationViewModel.cs",
+              "RelativeToolTip": "ViewModels\\NotificationViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:55:14.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderViewModel.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\OrderViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\OrderViewModel.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\ViewModels\\OrderViewModel.cs",
+              "RelativeToolTip": "ViewModels\\OrderViewModel.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAuwGQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:53:27.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\WPFEventDriven\\WpfPrismEventAggregatorDemo\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T07:52:56.288Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

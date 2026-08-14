@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TemperatureDashboard/TemperatureDashboard.csproj" />
+  <Project Path="TemperatureSensorSimulator/TemperatureSensorSimulator.csproj" />
+</Solution>

@@ -1,0 +1,319 @@
+<Window x:Class="WpfPrismEventAggregatorDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Prism EventAggregator - Saga Transaction Rollback Demo"
+        Height="620"
+        Width="1050"
+        WindowStartupLocation="CenterScreen"
+        Background="#0F172A"
+        Foreground="#F8FAFC">
+    <Window.Resources>
+        <!-- Modern Card Style -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#1E293B"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="12" Color="#000000" Opacity="0.25" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#6366F1" Offset="0.0"/>
+                        <GradientStop Color="#4F46E5" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern TextBox Style -->
+        <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#334155"/>
+            <Setter Property="Foreground" Value="#F8FAFC"/>
+            <Setter Property="CaretBrush" Value="#6366F1"/>
+            <Setter Property="BorderBrush" Value="#475569"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="SelectionBrush" Value="#6366F1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#6366F1"/>
+                                <Setter TargetName="border" Property="Background" Value="#1E293B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+ 
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+ 
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Enterprise Event-Driven Architecture (EDA) Patterns"
+                       Foreground="#6366F1"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Margin="0,0,0,4"/>
+            <TextBlock Text="Saga Transaction Management &amp; Rollback Simulation"
+                       FontSize="24"
+                       FontWeight="ExtraBold"
+                       Foreground="#F8FAFC"/>
+        </StackPanel>
+ 
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT COLUMN: Input, Dashboard, Legacy Notification -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <!-- Order Creation -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Order Placement" FontSize="15" FontWeight="Bold" Foreground="#94A3B8" Margin="0,0,0,12"/>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" 
+                                     Style="{StaticResource ModernTextBoxStyle}"
+                                     Margin="0,0,10,0"
+                                     Text="{Binding Order.OrderName, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Grid.Column="1" 
+                                    Content="Place Order" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.PlaceOrderCommand}" 
+                                    Width="110"/>
+                        </Grid>
+                        
+                        <!-- Toggle for simulating failure -->
+                        <CheckBox IsChecked="{Binding Order.SimulatePaymentFailure}" 
+                                  Foreground="#EF4444" 
+                                  FontWeight="SemiBold"
+                                  FontSize="13"
+                                  Content="Simulate Payment Failure (Triggers Rollback!)"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Thread Option Demo Section -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="🧵 ThreadOption Demonstrations" FontSize="15" FontWeight="Bold" Foreground="#F59E0B" Margin="0,0,0,12"/>
+                        <TextBlock Text="Learn how different threading models work" FontSize="11" Foreground="#94A3B8" Margin="0,0,0,10" TextWrapping="Wrap"/>
+                        
+                        <WrapPanel ItemWidth="140" HorizontalAlignment="Left">
+                            <Button Content="PublisherThread" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.TestPublisherThreadCommand}"
+                                    Margin="0,0,8,8"
+                                    Padding="10,6"
+                                    FontSize="11"/>
+                            
+                            <Button Content="UIThread" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.TestUIThreadCommand}"
+                                    Margin="0,0,8,8"
+                                    Padding="10,6"
+                                    FontSize="11"/>
+                            
+                            <Button Content="BackgroundThread" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.TestBackgroundThreadCommand}"
+                                    Margin="0,0,8,8"
+                                    Padding="10,6"
+                                    FontSize="11"/>
+                            
+                            <Button Content="Async Operation" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.TestAsyncOperationCommand}"
+                                    Margin="0,0,8,8"
+                                    Padding="10,6"
+                                    FontSize="11"/>
+                            
+                            <Button Content="Multiple Subscribers" 
+                                    Style="{StaticResource ModernButtonStyle}"
+                                    Command="{Binding Order.TestMultipleSubscribersCommand}"
+                                    Margin="0,0,8,8"
+                                    Padding="10,6"
+                                    FontSize="11"/>
+                        </WrapPanel>
+                        
+                        <TextBlock FontSize="10" Foreground="#64748B" Margin="0,5,0,10" TextWrapping="Wrap">
+                            <Run FontWeight="Bold">PublisherThread:</Run> Blocks publisher (synchronous)<LineBreak/>
+                            <Run FontWeight="Bold">UIThread:</Run> Safe for UI updates<LineBreak/>
+                            <Run FontWeight="Bold">BackgroundThread:</Run> Non-blocking async
+                        </TextBlock>
+                        
+                        <!-- Parallel vs Sequential Comparison -->
+                        <Border Background="#1E293B" CornerRadius="8" Padding="10" Margin="0,5,0,0">
+                            <StackPanel>
+                                <TextBlock Text="⚡ Parallel vs Sequential Comparison" FontSize="11" FontWeight="Bold" Foreground="#F59E0B" Margin="0,0,0,8"/>
+                                
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Button Grid.Column="0" 
+                                            Content="⚡ Test Parallel (2s)" 
+                                            Style="{StaticResource ModernButtonStyle}"
+                                            Command="{Binding Order.TestParallelExecutionCommand}"
+                                            Margin="0,0,5,0"
+                                            Padding="8,6"
+                                            FontSize="10"
+                                            Background="#10B981"/>
+                                    
+                                    <Button Grid.Column="1" 
+                                            Content="🐌 Test Sequential (6s)" 
+                                            Style="{StaticResource ModernButtonStyle}"
+                                            Command="{Binding Order.TestSequentialExecutionCommand}"
+                                            Margin="5,0,0,0"
+                                            Padding="8,6"
+                                            FontSize="10"
+                                            Background="#EF4444"/>
+                                </Grid>
+                                
+                                <TextBlock FontSize="9" Foreground="#94A3B8" Margin="0,8,0,0" TextWrapping="Wrap">
+                                    <Run FontWeight="Bold" Foreground="#10B981">Parallel:</Run> 3 tasks run simultaneously (~2s total)<LineBreak/>
+                                    <Run FontWeight="Bold" Foreground="#EF4444">Sequential:</Run> 3 tasks run one-by-one (~6s total)
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Dashboard -->
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="SYSTEM DASHBOARD" FontSize="10" FontWeight="Bold" Foreground="#38BDF8" Margin="0,0,0,5"/>
+                            <TextBlock Text="{Binding Dashboard.TotalOrdersText}" FontSize="16" FontWeight="SemiBold" Foreground="#F8FAFC" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="📊" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Live Notifications (Legacy event support) -->
+                <Border Height="180" Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="LIVE ALERTS" FontSize="10" FontWeight="Bold" Foreground="#34D399" Margin="0,0,0,10"/>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <TextBlock Text="🔔" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Top"/>
+                                <TextBlock Text="{Binding Notification.Message}" 
+                                           Foreground="#A7F3D0" 
+                                           FontSize="13" 
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <!-- RIGHT COLUMN: Transaction Log (Saga Tracker) -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="SAGA TRANSACTION WORKFLOW LOG" FontSize="13" FontWeight="Bold" Foreground="#818CF8" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" 
+                                Content="Clear Log" 
+                                Style="{StaticResource ModernButtonStyle}" 
+                                Command="{Binding Order.ClearLogsCommand}" 
+                                Padding="10,5" 
+                                FontSize="11"
+                                Background="#334155"/>
+                    </Grid>
+
+                    <!-- Logs ListBox -->
+                    <ListBox Grid.Row="1" 
+                             ItemsSource="{Binding Order.Logs}" 
+                             Background="#0F172A" 
+                             BorderThickness="0" 
+                             Foreground="#E2E8F0"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             Padding="10">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Margin" Value="0,0,0,6"/>
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+
+                    <!-- Informational Box -->
+                    <Border Grid.Row="2" Background="#0F172A" CornerRadius="8" Padding="12" Margin="0,10,0,0">
+                        <TextBlock TextWrapping="Wrap" Foreground="#94A3B8" FontSize="11.5">
+                            <Bold Foreground="#6366F1">Saga Pattern logic:</Bold>
+                            Order Created event fires -> Stock Reserved -> Process Payment. 
+                            If payment fails, the system broadcasts Payment Failed, triggering the compensating transaction in InventoryService to roll back (release) reserved stock, keeping databases consistent.
+                        </TextBlock>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

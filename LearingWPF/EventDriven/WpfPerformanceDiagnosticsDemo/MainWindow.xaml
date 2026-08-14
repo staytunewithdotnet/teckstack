@@ -1,0 +1,241 @@
+<Window x:Class="WpfPerformanceDiagnosticsDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF Performance Diagnostics &amp; Learning Sandbox" Height="800" Width="1200"
+        Background="#121214" Foreground="#e1e1e6"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Correct template with no binding errors -->
+        <DataTemplate x:Key="NormalTemplate">
+            <Border BorderBrush="#27272a" BorderThickness="0,0,0,1" Padding="10" Background="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Id}" FontWeight="Bold" Foreground="#3b82f6"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Email}" Foreground="#a1a1aa"/>
+                    <TextBlock Grid.Column="3" Text="{Binding Company}" Foreground="#8f8f9d"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Template with binding errors (binding to non-existent properties) -->
+        <DataTemplate x:Key="BindingErrorTemplate">
+            <Border BorderBrush="#27272a" BorderThickness="0,0,0,1" Padding="10" Background="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding IdErrorTypo}" FontWeight="Bold" Foreground="#ef4444"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CustomerNameTypo}" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="2" Text="{Binding EmailAddressTypo}" Foreground="#ef4444"/>
+                    <TextBlock Grid.Column="3" Text="{Binding CompanyNameTypo}" Foreground="#ef4444"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Title Bar -->
+        <Border Grid.Row="0" Background="#1a1a1e" BorderBrush="#29292e" BorderThickness="0,0,0,1" Padding="20,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="WPF Performance &amp; Diagnostics Sandbox" FontSize="22" FontWeight="Bold" Foreground="#3b82f6"/>
+                    <TextBlock Text="Interactive dashboard to simulate, diagnose, and fix common WPF performance issues" FontSize="12" Foreground="#8f8f9d" Margin="0,4,0,0"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Clear Leaks / Reset GC" Click="ResetButton_Click" Background="#ef4444" Foreground="White" Padding="15,8" FontWeight="Bold" BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Main Body -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Column: Diagnostic Control Panel -->
+            <Border Grid.Column="0" Background="#18181b" BorderBrush="#27272a" BorderThickness="0,0,1,0" Padding="15">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="SIMULATION CONTROLS" FontSize="14" FontWeight="Bold" Foreground="#a1a1aa" Margin="0,0,0,10"/>
+
+                        <!-- 1. Memory Leak -->
+                        <GroupBox Header="1 &amp; 2. Memory &amp; Event Leaks" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <CheckBox x:Name="MemoryLeakCheckbox" Content="Simulate Memory Leak (Keep static reference)" Foreground="White"/>
+                                <CheckBox x:Name="EventLeakCheckbox" Content="Simulate Event Leak (Static sub without unsub)" Foreground="White"/>
+                                <CheckBox x:Name="BitmapLeakCheckbox" Content="Simulate Bitmap Leak (Cache large images)" Foreground="White"/>
+                                <CheckBox x:Name="TimerLeakCheckbox" Content="Simulate Timer Leak (Keep window timers active)" Foreground="White"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <Button Content="Open Customer Detail" Click="OpenCustomerDetail_Click" Background="#3b82f6" Foreground="White" Padding="10,5" BorderThickness="0"/>
+                                    <Button Content="Simulate 50 Opens" Click="SimulateManyOpens_Click" Background="#2563eb" Foreground="White" Padding="10,5" BorderThickness="0"/>
+                                </StackPanel>
+                                <TextBlock x:Name="OpenWindowsCountText" Text="Active simulated instances: 0" FontSize="11" Foreground="#a1a1aa" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- 3. Dispatcher Queue Overload -->
+                        <GroupBox Header="3. Dispatcher Queue Overload" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Spam the dispatcher queue with intensive UI-bound dummy tasks." FontSize="11" Foreground="#a1a1aa" TextWrapping="Wrap"/>
+                                <Button x:Name="DispatcherOverloadBtn" Content="Toggle Dispatcher Overload" Click="ToggleDispatcherOverload_Click" Background="#8b5cf6" Foreground="White" Padding="10,6" BorderThickness="0"/>
+                                <TextBlock x:Name="DispatcherStatusText" Text="Dispatcher Status: Normal" FontSize="11" Foreground="#10b981"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- 5. Large Collection & Virtualization -->
+                        <GroupBox Header="5. Large Collection &amp; Virtualization" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <CheckBox x:Name="EnableVirtualizationCheckbox" Content="Enable UI Virtualization (VirtualizingStackPanel)" IsChecked="True" Foreground="White"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Load 100 Customers" Click="LoadCustomers100_Click" Background="#059669" Foreground="White" Padding="10,5" BorderThickness="0"/>
+                                    <Button Content="Load 100,000 Customers" Click="LoadCustomers100k_Click" Background="#047857" Foreground="White" Padding="10,5" BorderThickness="0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- 6. GC Pressure -->
+                        <GroupBox Header="6. GC Pressure" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Allocate millions of temporary objects repeatedly." FontSize="11" Foreground="#a1a1aa" TextWrapping="Wrap"/>
+                                <Button x:Name="GcPressureBtn" Content="Toggle GC Pressure" Click="ToggleGcPressure_Click" Background="#ec4899" Foreground="White" Padding="10,6" BorderThickness="0"/>
+                                <TextBlock x:Name="GcPressureStatusText" Text="GC Pressure: Idle" FontSize="11" Foreground="#10b981"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- 8. Binding Errors -->
+                        <GroupBox Header="8. Binding Errors" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Force WPF to log binding errors by binding to incorrect property names." FontSize="11" Foreground="#a1a1aa" TextWrapping="Wrap"/>
+                                <Button x:Name="BindingErrorBtn" Content="Toggle Binding Errors" Click="ToggleBindingErrors_Click" Background="#eab308" Foreground="Black" Padding="10,6" BorderThickness="0" FontWeight="Bold"/>
+                                <TextBlock x:Name="BindingErrorStatusText" Text="Binding Errors: Inactive" FontSize="11" Foreground="#10b981"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- 9. Logging Overhead -->
+                        <GroupBox Header="9. Logging Overhead" Background="#202024" BorderBrush="#2d2d34" Foreground="White" Margin="0,0,0,10">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Synchronously write verbose text to disk/console on the UI or background threads." FontSize="11" Foreground="#a1a1aa" TextWrapping="Wrap"/>
+                                <Button x:Name="LoggingOverheadBtn" Content="Toggle Logging Overhead" Click="ToggleLoggingOverhead_Click" Background="#f97316" Foreground="White" Padding="10,6" BorderThickness="0"/>
+                                <TextBlock x:Name="LoggingStatusText" Text="Logging: Normal" FontSize="11" Foreground="#10b981"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Middle Column: Workspace (Customer Grid) -->
+            <Grid Grid.Column="1" Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="CUSTOMER DATA WORKSPACE" FontSize="14" FontWeight="Bold" Foreground="#a1a1aa" Margin="0,0,0,10"/>
+
+                <!-- Customer List Box / Grid -->
+                <!-- We can dynamically enable/disable virtualization using Style or direct properties -->
+                <ListBox x:Name="CustomerListBox" Grid.Row="1" Background="#18181b" BorderBrush="#27272a" Foreground="White"
+                         ItemTemplate="{StaticResource NormalTemplate}"
+                         ScrollViewer.CanContentScroll="{Binding IsChecked, ElementName=EnableVirtualizationCheckbox}"
+                         VirtualizingStackPanel.IsVirtualizing="{Binding IsChecked, ElementName=EnableVirtualizationCheckbox}">
+                </ListBox>
+            </Grid>
+
+            <!-- Right Column: Real-Time Telemetry Dashboard -->
+            <Border Grid.Column="2" Background="#18181b" BorderBrush="#27272a" BorderThickness="1,0,0,0" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="REAL-TIME TELEMETRY" FontSize="14" FontWeight="Bold" Foreground="#a1a1aa"/>
+
+                    <!-- Memory Monitor -->
+                    <Border Background="#202024" CornerRadius="8" Padding="15" BorderBrush="#2d2d34" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="HEAP ALLOCATION" FontSize="11" Foreground="#a1a1aa" FontWeight="Bold"/>
+                            <TextBlock x:Name="MemoryUsageText" Text="0.00 MB" FontSize="26" FontWeight="Bold" Foreground="#10b981" Margin="0,5,0,0"/>
+                            <ProgressBar x:Name="MemoryProgressBar" Height="6" Maximum="500" Value="10" Foreground="#10b981" Background="#2d2d34" BorderThickness="0" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Dispatcher Lag Monitor -->
+                    <Border Background="#202024" CornerRadius="8" Padding="15" BorderBrush="#2d2d34" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="UI THREAD DISPATCHER LAG" FontSize="11" Foreground="#a1a1aa" FontWeight="Bold"/>
+                            <TextBlock x:Name="DispatcherLagText" Text="0 ms" FontSize="26" FontWeight="Bold" Foreground="#3b82f6" Margin="0,5,0,0"/>
+                            <TextBlock Text="Lag > 50ms feels sluggish" FontSize="10" Foreground="#8f8f9d" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- GC Generations Monitor -->
+                    <Border Background="#202024" CornerRadius="8" Padding="15" BorderBrush="#2d2d34" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="GARBAGE COLLECTOR COUNTS" FontSize="11" Foreground="#a1a1aa" FontWeight="Bold" Margin="0,0,0,5"/>
+                            
+                            <Grid>
+                                <TextBlock Text="Gen 0 (Short-lived):" Foreground="#e1e1e6"/>
+                                <TextBlock x:Name="Gen0CountText" Text="0" HorizontalAlignment="Right" Foreground="#10b981" FontWeight="Bold"/>
+                            </Grid>
+                            <Grid>
+                                <TextBlock Text="Gen 1 (Medium-lived):" Foreground="#e1e1e6"/>
+                                <TextBlock x:Name="Gen1CountText" Text="0" HorizontalAlignment="Right" Foreground="#f59e0b" FontWeight="Bold"/>
+                            </Grid>
+                            <Grid>
+                                <TextBlock Text="Gen 2 (Long-lived / Leaks):" Foreground="#e1e1e6"/>
+                                <TextBlock x:Name="Gen2CountText" Text="0" HorizontalAlignment="Right" Foreground="#ef4444" FontWeight="Bold"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Active Events Subscriptions -->
+                    <Border Background="#202024" CornerRadius="8" Padding="15" BorderBrush="#2d2d34" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="ACTIVE EVENT SUBSCRIBERS" FontSize="11" Foreground="#a1a1aa" FontWeight="Bold"/>
+                            <TextBlock x:Name="SubscriberCountText" Text="0 subscribers" FontSize="20" FontWeight="Bold" Foreground="#ec4899" Margin="0,5,0,0"/>
+                            <TextBlock Text="Static publisher listeners" FontSize="10" Foreground="#8f8f9d" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Bottom Row: Diagnostic Console / Logs -->
+        <Border Grid.Row="2" Background="#16161a" BorderBrush="#29292e" BorderThickness="0,1,0,0" Padding="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBlock Text="DIAGNOSTIC OUTPUT LOG" FontSize="12" FontWeight="Bold" Foreground="#a1a1aa"/>
+                    <Button Content="Clear Log" Click="ClearLog_Click" HorizontalAlignment="Right" Background="Transparent" Foreground="#8f8f9d" BorderThickness="0" FontSize="11"/>
+                </Grid>
+                <TextBox x:Name="ConsoleLogBox" Grid.Row="1" Margin="0,8,0,0" Background="#0d0d0f" Foreground="#10b981" BorderBrush="#27272a" 
+                         FontFamily="Consolas" FontSize="11" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

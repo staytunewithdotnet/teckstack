@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\designpattern\\behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|solutionrelative:behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\designpattern\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\designpattern\\features\\customers\\createcustomer\\createcustomercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|solutionrelative:features\\customers\\createcustomer\\createcustomercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\designpattern\\features\\customers\\auditcustomercreatedhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|solutionrelative:features\\customers\\auditcustomercreatedhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\designpattern\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9216FB-98D0-558E-0C7D-F85187B86AF8}|WpfMediatRLearningApp.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateCustomerCommandHandler.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Features\\Customers\\CreateCustomer\\CreateCustomerCommandHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Customers\\CreateCustomer\\CreateCustomerCommandHandler.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Features\\Customers\\CreateCustomer\\CreateCustomerCommandHandler.cs",
+              "RelativeToolTip": "Features\\Customers\\CreateCustomer\\CreateCustomerCommandHandler.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAgwAwAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T05:57:52.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuditCustomerCreatedHandler.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Features\\Customers\\AuditCustomerCreatedHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Customers\\AuditCustomerCreatedHandler.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Features\\Customers\\AuditCustomerCreatedHandler.cs",
+              "RelativeToolTip": "Features\\Customers\\AuditCustomerCreatedHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T05:57:28.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoggingBehavior.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Behaviors\\LoggingBehavior.cs",
+              "RelativeDocumentMoniker": "Behaviors\\LoggingBehavior.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\Behaviors\\LoggingBehavior.cs",
+              "RelativeToolTip": "Behaviors\\LoggingBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T05:56:29.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T05:56:05.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\DesignPattern\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T05:55:54.137Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

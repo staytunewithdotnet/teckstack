@@ -1,0 +1,167 @@
+<Window x:Class="WpfPrismEventAggregatorDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Prism EventAggregator Demo"
+        Height="450"
+        Width="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#0F172A"
+        Foreground="#F8FAFC">
+    <Window.Resources>
+        <!-- Modern Card Style -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#1E293B"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="15" Color="#000000" Opacity="0.3" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#6366F1" Offset="0.0"/>
+                        <GradientStop Color="#4F46E5" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern TextBox Style -->
+        <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#334155"/>
+            <Setter Property="Foreground" Value="#F8FAFC"/>
+            <Setter Property="CaretBrush" Value="#6366F1"/>
+            <Setter Property="BorderBrush" Value="#475569"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="SelectionBrush" Value="#6366F1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#6366F1"/>
+                                <Setter TargetName="border" Property="Background" Value="#1E293B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+ 
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+ 
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <TextBlock Text="Enterprise Event-Driven Architecture"
+                       Foreground="#6366F1"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Margin="0,0,0,4"/>
+            <TextBlock Text="WPF Prism EventAggregator Demo"
+                       FontSize="26"
+                       FontWeight="ExtraBold"
+                       Foreground="#F8FAFC"/>
+        </StackPanel>
+ 
+        <!-- Order Placement Card -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Create New Order" FontSize="16" FontWeight="Bold" Foreground="#94A3B8" Margin="0,0,0,12"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" 
+                             Style="{StaticResource ModernTextBoxStyle}"
+                             Margin="0,0,12,0"
+                             Text="{Binding Order.OrderName, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Enter order name..." />
+                    <Button Grid.Column="1" 
+                            Content="Place Order" 
+                            Style="{StaticResource ModernButtonStyle}"
+                            Command="{Binding Order.PlaceOrderCommand}" 
+                            Width="130"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+ 
+        <!-- Dashboard Card -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="SYSTEM DASHBOARD" FontSize="11" FontWeight="Bold" Foreground="#38BDF8" Margin="0,0,0,5"/>
+                    <TextBlock Text="{Binding Dashboard.TotalOrdersText}" FontSize="18" FontWeight="SemiBold" Foreground="#F8FAFC" />
+                </StackPanel>
+                <Border Grid.Column="1" Background="#38BDF8" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.2"/>
+                <!-- Simple dashboard icon/checkmark representation -->
+                <TextBlock Grid.Column="1" Text="📊" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+ 
+        <!-- Notification Card -->
+        <Border Grid.Row="3" Style="{StaticResource CardStyle}" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="LIVE NOTIFICATIONS" FontSize="11" FontWeight="Bold" Foreground="#34D399" Margin="0,0,0,10"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBlock Text="🔔" FontSize="18" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                        <TextBlock Text="{Binding Notification.Message}" 
+                                   Foreground="#A7F3D0" 
+                                   FontSize="15" 
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Top"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
