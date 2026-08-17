@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3PY6b4DvM6U=",
+  "dgSpecHash": "TUumk4ZBDRc=",
   "success": true,
-  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\TemperatureDashboard.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\TemperatureDashboard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lokender.tiwari\\.nuget\\packages\\mqttnet\\4.3.7.1207\\mqttnet.4.3.7.1207.nupkg.sha512"
+  ],
   "logs": []
 }

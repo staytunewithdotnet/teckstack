@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\WpfPerformanceDiagnosticsDemo.csproj",
+      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\WpfPerformanceDiagnosticsDemo.csproj",
       "projectName": "WpfPerformanceDiagnosticsDemo",
-      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\WpfPerformanceDiagnosticsDemo.csproj",
+      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\WpfPerformanceDiagnosticsDemo.csproj",
       "packagesPath": "C:\\Users\\lokender.tiwari\\.nuget\\packages\\",
-      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\obj\\",
+      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPerformanceDiagnosticsDemo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

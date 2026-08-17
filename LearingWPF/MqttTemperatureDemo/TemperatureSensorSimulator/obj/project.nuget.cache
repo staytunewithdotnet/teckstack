@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4vnQCurltj0=",
+  "dgSpecHash": "+60OsdP6V1k=",
   "success": true,
-  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\TemperatureSensorSimulator.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\TemperatureSensorSimulator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lokender.tiwari\\.nuget\\packages\\mqttnet\\4.3.7.1207\\mqttnet.4.3.7.1207.nupkg.sha512"
+  ],
   "logs": []
 }

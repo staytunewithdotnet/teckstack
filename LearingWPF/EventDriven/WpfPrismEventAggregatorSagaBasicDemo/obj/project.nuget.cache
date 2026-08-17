@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3bHNdYuOyDU=",
+  "dgSpecHash": "zucZthNUuak=",
   "success": true,
-  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorSagaBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
+  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorSagaBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lokender.tiwari\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\lokender.tiwari\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.122\\microsoft.xaml.behaviors.wpf.1.1.122.nupkg.sha512",

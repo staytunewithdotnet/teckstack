@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D1uFrOnKqtE=",
+  "dgSpecHash": "+LJdvgtP0Ck=",
   "success": true,
-  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
+  "projectFilePath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lokender.tiwari\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\lokender.tiwari\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

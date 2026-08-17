@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\",
+  "WorkspaceRootPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{204DFE0C-6E3A-164E-F5E1-424D4E86CA1A}|TemperatureSensorSimulator\\TemperatureSensorSimulator.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\mqtttemperaturedemo\\temperaturesensorsimulator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{204DFE0C-6E3A-164E-F5E1-424D4E86CA1A}|TemperatureSensorSimulator\\TemperatureSensorSimulator.csproj|c:\\appcodestore\\ai-model-code\\teckstack\\learingwpf\\mqtttemperaturedemo\\temperaturesensorsimulator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{204DFE0C-6E3A-164E-F5E1-424D4E86CA1A}|TemperatureSensorSimulator\\TemperatureSensorSimulator.csproj|solutionrelative:temperaturesensorsimulator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2519370B-168A-0AE8-EB92-2D26D793020B}|TemperatureDashboard\\TemperatureDashboard.csproj|c:\\appcodestore\\ai-model-code\\learingwpf\\mqtttemperaturedemo\\temperaturedashboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2519370B-168A-0AE8-EB92-2D26D793020B}|TemperatureDashboard\\TemperatureDashboard.csproj|c:\\appcodestore\\ai-model-code\\teckstack\\learingwpf\\mqtttemperaturedemo\\temperaturedashboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2519370B-168A-0AE8-EB92-2D26D793020B}|TemperatureDashboard\\TemperatureDashboard.csproj|solutionrelative:temperaturedashboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -24,22 +24,21 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "TemperatureDashboard\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureDashboard\\MainWindow.xaml.cs",
               "RelativeToolTip": "TemperatureDashboard\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAACkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-13T08:29:09.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-13T08:29:09.095Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\Program.cs",
+              "DocumentMoniker": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\Program.cs",
               "RelativeDocumentMoniker": "TemperatureSensorSimulator\\Program.cs",
-              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\Program.cs",
+              "ToolTip": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MqttTemperatureDemo\\TemperatureSensorSimulator\\Program.cs",
               "RelativeToolTip": "TemperatureSensorSimulator\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

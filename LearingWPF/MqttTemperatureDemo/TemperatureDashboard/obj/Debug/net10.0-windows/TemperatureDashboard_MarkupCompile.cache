@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\AppCodeStore\AI-Model-Code\LearingWPF\MqttTemperatureDemo\TemperatureDashboard\obj\Debug\net10.0-windows\
+C:\AppCodeStore\AI-Model-Code\teckstack\LearingWPF\MqttTemperatureDemo\TemperatureDashboard\obj\Debug\net10.0-windows\
 TemperatureDashboard
 none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\AppCodeStore\AI-Model-Code\LearingWPF\MqttTemperatureDemo\TemperatureDashboard\App.xaml
+C:\AppCodeStore\AI-Model-Code\teckstack\LearingWPF\MqttTemperatureDemo\TemperatureDashboard\App.xaml
 11407045341
 
 61697094512
-206702017258
+207-1742714615
 MainWindow.xaml;
 
 False

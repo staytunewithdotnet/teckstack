@@ -1809,11 +1809,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
+      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
       "projectName": "WpfMediatRLearningApp",
-      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
+      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MediatR\\WpfMediatRLearningApp.csproj",
       "packagesPath": "C:\\Users\\lokender.tiwari\\.nuget\\packages\\",
-      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\MediatR\\obj\\",
+      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\MediatR\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

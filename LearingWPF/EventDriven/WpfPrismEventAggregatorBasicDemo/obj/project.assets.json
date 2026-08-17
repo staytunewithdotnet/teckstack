@@ -469,11 +469,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
+      "projectUniqueName": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
       "projectName": "WpfPrismEventAggregatorDemo",
-      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
+      "projectPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\WpfPrismEventAggregatorDemo.csproj",
       "packagesPath": "C:\\Users\\lokender.tiwari\\.nuget\\packages\\",
-      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\obj\\",
+      "outputPath": "C:\\AppCodeStore\\AI-Model-Code\\teckstack\\LearingWPF\\EventDriven\\WpfPrismEventAggregatorBasicDemo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
