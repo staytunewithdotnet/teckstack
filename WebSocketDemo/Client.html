@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <p>Open the browser's developer console to see the logs.</p>
+    <button onclick="callSocket()">Call WebSocket</button>
+    <script type="text/javascript">
+        function callSocket() {
+            // Adjust the URL if your server runs on a different port
+            // The server is configured to run on http://localhost:5180 by default
+            const socket = new WebSocket("http://localhost:5180/ws");
+
+            socket.onopen = () => {
+                console.log("Connected");
+                socket.send("Hello from browser");
+            };
+
+            socket.onmessage = event => {
+                console.log("Server says:", event.data);
+            };
+
+            socket.onclose = event => {
+                console.log("Closed:", event.code, event.reason);
+            };
+
+            socket.onerror = error => {
+                console.error("WebSocket error", error);
+            };
+        }
+    </script>
+</body>
+</html>

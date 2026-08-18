@@ -1,0 +1,19 @@
+syntax = "proto3";
+option csharp_namespace = "ProductGrpcServer";
+
+package product.v1;
+
+service ProductService {
+  rpc GetProduct (GetProductRequest) returns (GetProductReply);
+}
+
+message GetProductRequest {
+  int32 product_id = 1;
+}
+
+message GetProductReply {
+  int32 product_id = 1;
+  string name = 2;
+  int64 price_minor_units = 3;
+  string currency = 4;
+}

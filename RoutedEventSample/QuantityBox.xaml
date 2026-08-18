@@ -1,0 +1,22 @@
+<UserControl x:Class="RoutedEventSample.QuantityBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="150">
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="3">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button x:Name="btnDecrease" Grid.Column="0" Content="-" FontSize="16" Click="BtnDecrease_Click"/>
+            <TextBox x:Name="txtQuantity" Grid.Column="1" Text="1" TextAlignment="Center" 
+                     TextChanged="TxtQuantity_TextChanged"/>
+            <Button x:Name="btnIncrease" Grid.Column="2" Content="+" FontSize="16" Click="BtnIncrease_Click"/>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,300 @@
+CUSTOM ROUTED EVENT IN WPF - DETAILED EXPLANATION
+
+====================================================
+1. WHAT IS A ROUTED EVENT?
+====================================================
+
+A Routed Event is a special WPF event that can travel through the visual tree.
+
+Unlike normal C# events, routed events can be handled not only by the control
+that raises them, but also by parent controls.
+
+Example Visual Tree:
+
+Window
+ └─ Grid
+     └─ MyControl
+
+If MyControl raises a Bubbling Routed Event:
+
+MyControl
+   ↑
+Grid
+   ↑
+Window
+
+The event moves upward and can be handled by Grid or Window.
+
+
+====================================================
+2. REGISTERING THE ROUTED EVENT
+====================================================
+
+Code:
+
+public static readonly RoutedEvent ValueChangedEvent =
+    EventManager.RegisterRoutedEvent(
+        nameof(ValueChanged),
+        RoutingStrategy.Bubbling,
+        typeof(RoutedEventHandler),
+        typeof(MyControl));
+
+Explanation:
+
+nameof(ValueChanged)
+--------------------
+Specifies the event name.
+Equivalent to:
+
+"ValueChanged"
+
+RoutingStrategy.Bubbling
+------------------------
+Defines how the event travels.
+
+Bubbling:
+Child → Parent → Grandparent
+
+Other routing strategies:
+
+RoutingStrategy.Bubbling
+RoutingStrategy.Tunnel
+RoutingStrategy.Direct
+
+typeof(RoutedEventHandler)
+--------------------------
+Defines the delegate type for the event.
+
+Handler signature:
+
+void Handler(object sender, RoutedEventArgs e)
+{
+}
+
+typeof(MyControl)
+-----------------
+Indicates that MyControl owns this event.
+
+
+====================================================
+3. CLR EVENT WRAPPER
+====================================================
+
+Code:
+
+public event RoutedEventHandler ValueChanged
+{
+    add => AddHandler(ValueChangedEvent, value);
+    remove => RemoveHandler(ValueChangedEvent, value);
+}
+
+Purpose:
+
+Allows developers to use standard event syntax:
+
+myControl.ValueChanged += MyHandler;
+
+Internally WPF calls:
+
+AddHandler(ValueChangedEvent, value);
+
+Without this wrapper developers would need:
+
+myControl.AddHandler(MyControl.ValueChangedEvent, handler);
+
+The wrapper makes the event easier to use.
+
+
+====================================================
+4. RAISING THE EVENT
+====================================================
+
+Code:
+
+protected virtual void OnValueChanged()
+{
+    RaiseEvent(new RoutedEventArgs(ValueChangedEvent, this));
+}
+
+Explanation:
+
+new RoutedEventArgs(ValueChangedEvent, this)
+--------------------------------------------
+Creates event arguments.
+
+ValueChangedEvent = Event being raised
+this = Source of the event
+
+RaiseEvent(...)
+---------------
+Starts the WPF routing process.
+
+Because the routing strategy is Bubbling:
+
+MyControl
+   ↑
+Grid
+   ↑
+Window
+
+Each parent gets a chance to handle the event.
+
+
+====================================================
+5. COMPLETE EXAMPLE
+====================================================
+
+Custom Control:
+
+public class MyControl : Control
+{
+    public static readonly RoutedEvent ValueChangedEvent =
+        EventManager.RegisterRoutedEvent(
+            nameof(ValueChanged),
+            RoutingStrategy.Bubbling,
+            typeof(RoutedEventHandler),
+            typeof(MyControl));
+
+    public event RoutedEventHandler ValueChanged
+    {
+        add => AddHandler(ValueChangedEvent, value);
+        remove => RemoveHandler(ValueChangedEvent, value);
+    }
+
+    protected virtual void OnValueChanged()
+    {
+        RaiseEvent(new RoutedEventArgs(ValueChangedEvent, this));
+    }
+
+    public void ChangeValue()
+    {
+        OnValueChanged();
+    }
+}
+
+
+XAML:
+
+<Grid ValueChanged="Grid_ValueChanged">
+    <local:MyControl x:Name="myControl"/>
+</Grid>
+
+
+Code Behind:
+
+private void Grid_ValueChanged(object sender, RoutedEventArgs e)
+{
+    MessageBox.Show("ValueChanged received in Grid");
+}
+
+
+====================================================
+6. RUNTIME FLOW
+====================================================
+
+myControl.ChangeValue()
+        |
+        v
+OnValueChanged()
+        |
+        v
+RaiseEvent(...)
+        |
+        v
+MyControl
+        |
+        v
+Grid
+        |
+        v
+Window
+
+
+====================================================
+7. SENDER VS SOURCE
+====================================================
+
+Suppose:
+
+Window
+ └─ Grid
+     └─ MyControl
+
+Handler:
+
+private void Grid_ValueChanged(object sender, RoutedEventArgs e)
+{
+    Console.WriteLine(sender);
+    Console.WriteLine(e.Source);
+}
+
+Output:
+
+sender = Grid
+e.Source = MyControl
+
+Meaning:
+
+sender
+------
+Current object handling the event.
+
+Source
+------
+Original object that raised the event.
+
+
+====================================================
+8. WHY USE ROUTED EVENTS?
+====================================================
+
+Normal Event:
+
+public event EventHandler ValueChanged;
+
+Requires direct subscription:
+
+myControl.ValueChanged += Handler;
+
+Parent containers cannot automatically intercept it.
+
+Routed Event:
+
+<Grid ValueChanged="Grid_ValueChanged">
+
+The Grid can handle events raised by child controls.
+
+Common WPF routed events include:
+
+Button.Click
+MouseDown
+MouseMove
+KeyDown
+KeyUp
+
+
+====================================================
+9. REAL-WORLD USE CASE
+====================================================
+
+Imagine a custom QuantityBox control.
+
+Whenever the quantity changes, it raises:
+
+ValueChanged
+
+Instead of subscribing to every control:
+
+qty1.ValueChanged += ...
+qty2.ValueChanged += ...
+qty3.ValueChanged += ...
+
+A parent container can listen once:
+
+<StackPanel ValueChanged="AnyQuantityChanged">
+
+and receive events from all child controls.
+
+This is the main benefit of Routed Events:
+
+Event propagation through the WPF visual tree, allowing parent controls to react to child control events without direct subscriptions.
