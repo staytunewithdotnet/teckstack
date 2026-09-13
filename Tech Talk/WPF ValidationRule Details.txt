@@ -1,0 +1,215 @@
+WPF Binding Validation - Part 1: ValidationRule
+
+WHAT IS A VALIDATIONRULE?
+
+ValidationRule is a WPF validation mechanism used to validate user input before the value is updated in the source property (ViewModel/Model).
+
+It is useful when validation logic belongs to the UI layer and you want to check whether the entered value is valid.
+
+COMMON USE CASES
+
+- Age must be between 18 and 60
+- Salary must be greater than 0
+- Only numbers are allowed
+- Required field validation
+- Date format validation
+
+HOW VALIDATIONRULE WORKS
+
+Flow:
+
+User Input
+    ↓
+TextBox
+    ↓
+Binding
+    ↓
+ValidationRule Executes
+    ↓
+Valid ?
+    ↓
+Yes → Update Source Property
+No  → Show Validation Error
+
+EXAMPLE: AGE VALIDATION
+
+Step 1: Create a ValidationRule class
+
+using System.Globalization;
+using System.Windows.Controls;
+
+public class AgeValidationRule : ValidationRule
+{
+    public override ValidationResult Validate(
+        object value,
+        CultureInfo cultureInfo)
+    {
+        int age;
+
+        if (!int.TryParse(value.ToString(), out age))
+        {
+            return new ValidationResult(
+                false,
+                "Enter a valid number");
+        }
+
+        if (age < 18 || age > 60)
+        {
+            return new ValidationResult(
+                false,
+                "Age must be between 18 and 60");
+        }
+
+        return ValidationResult.ValidResult;
+    }
+}
+
+EXPLANATION
+
+Validate() is automatically called whenever the user changes the TextBox value.
+
+If the value is invalid:
+
+return new ValidationResult(false, "Error Message");
+
+If valid:
+
+return ValidationResult.ValidResult;
+
+Step 2: Use in XAML
+
+<TextBox>
+    <TextBox.Text>
+        <Binding Path="Age"
+                 UpdateSourceTrigger="PropertyChanged">
+            <Binding.ValidationRules>
+                <local:AgeValidationRule/>
+            </Binding.ValidationRules>
+        </Binding>
+    </TextBox.Text>
+</TextBox>
+
+WHAT HAPPENS?
+
+User enters: 10
+
+ValidationRule runs.
+
+Result:
+
+Age must be between 18 and 60
+
+Source property is NOT updated.
+
+User enters: 25
+
+Validation succeeds.
+
+Source property gets updated.
+
+UNDERSTANDING ValidationResult
+
+Valid:
+
+return ValidationResult.ValidResult;
+
+Invalid:
+
+return new ValidationResult(false,
+    "Age must be between 18 and 60");
+
+First Parameter:
+
+true  = valid
+false = invalid
+
+Second Parameter:
+
+Error message displayed to user.
+
+SHOWING ERROR IN UI
+
+<Style TargetType="TextBox">
+    <Style.Triggers>
+        <Trigger Property="Validation.HasError"
+                 Value="True">
+            <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={RelativeSource Self},
+                                    Path=(Validation.Errors)[0].ErrorContent}"/>
+        </Trigger>
+    </Style.Triggers>
+</Style>
+
+Now the error message appears as a tooltip.
+
+IMPORTANT PROPERTIES
+
+UpdateSourceTrigger="PropertyChanged"
+
+Validation runs whenever the user types.
+
+UpdateSourceTrigger="LostFocus"
+
+Validation runs when the TextBox loses focus.
+
+EXAMPLE: SALARY VALIDATION
+
+public class SalaryValidationRule : ValidationRule
+{
+    public override ValidationResult Validate(
+        object value,
+        CultureInfo cultureInfo)
+    {
+        decimal salary;
+
+        if (!decimal.TryParse(value.ToString(), out salary))
+        {
+            return new ValidationResult(false,
+                "Invalid salary");
+        }
+
+        if (salary <= 0)
+        {
+            return new ValidationResult(false,
+                "Salary must be greater than 0");
+        }
+
+        return ValidationResult.ValidResult;
+    }
+}
+
+ADVANTAGES OF ValidationRule
+
+- Easy to implement
+- Good for UI-level validation
+- Prevents invalid data from reaching source object
+- Reusable for multiple controls
+
+LIMITATIONS OF ValidationRule
+
+- No asynchronous validation
+- No support for multiple errors easily
+- Validation logic stays in UI layer
+- Not the preferred approach in MVVM applications
+
+INTERVIEW QUESTIONS
+
+Q1. When does ValidationRule execute?
+Answer:
+Before the value is updated in the source property.
+
+Q2. What method must be overridden?
+Answer:
+Validate().
+
+Q3. Can ValidationRule prevent source updates?
+Answer:
+Yes. If validation fails, the source property is not updated.
+
+Q4. Is ValidationRule recommended for complex MVVM validation?
+Answer:
+No. INotifyDataErrorInfo is generally preferred for modern MVVM applications.
+
+SUMMARY
+
+ValidationRule is a WPF validation mechanism that validates user input before updating the source property. It is commonly used for simple UI validations such as age range checks, numeric input validation, required fields, and format checks. If validation fails, WPF displays an error and prevents the invalid value from updating the bound property.

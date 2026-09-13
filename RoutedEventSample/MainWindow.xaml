@@ -16,8 +16,9 @@
         <TextBlock Grid.Row="0" Text="Routed Event Sample - Quantity Controls" 
                    FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
         
-        <!-- StackPanel that will receive routed events from child controls -->
+        <!-- Demonstrating the use of routed events - the StackPanel handles events from all child QuantityBox controls -->
         <StackPanel Grid.Row="1" x:Name="MainPanel" 
+                    ValueChanged="AnyQuantityChanged" 
                     Margin="0,0,0,20">
             <TextBlock Text="Multiple QuantityBox controls:" FontWeight="SemiBold" Margin="0,0,0,10"/>
             

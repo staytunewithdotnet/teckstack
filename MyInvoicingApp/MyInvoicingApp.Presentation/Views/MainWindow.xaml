@@ -1,0 +1,42 @@
+<Window x:Class="MyInvoicingApp.Presentation.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Invoice Creator" Height="300" Width="400">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0">Customer Name:</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Grid.Row="1" Grid.Column="0">Amount:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" />
+
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                Content="Save Invoice" 
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsBusy, Mode=OneWay, FallbackValue=True}"
+                Margin="0,10"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Text="{Binding Message}" 
+                   Foreground="Green"
+                   TextWrapping="Wrap" />
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" 
+                    Visibility="{Binding IsBusy, FallbackValue=Collapsed, Mode=OneWay}">
+            <ProgressBar IsIndeterminate="True" Height="16" Width="50" Margin="0,5,5,0"/>
+            <TextBlock Text="Processing..." VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

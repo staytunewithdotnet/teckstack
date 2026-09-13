@@ -1,7 +1,6 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media; // For VisualTreeHelper
 
 namespace RoutedEventSample
 {
@@ -15,9 +14,6 @@ namespace RoutedEventSample
         public MainWindow()
         {
             InitializeComponent();
-            
-            // Register the event handler for the routed event from QuantityBox using the helper
-            QuantityChangedEventHelper.AddValueChangedHandler(MainPanel, AnyQuantityChanged);
         }
 
         // Handler for the ValueChanged routed event from any child QuantityBox

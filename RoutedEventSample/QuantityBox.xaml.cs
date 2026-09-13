@@ -13,8 +13,8 @@ namespace RoutedEventSample
         public static readonly RoutedEvent ValueChangedEvent =
             EventManager.RegisterRoutedEvent(
                 nameof(ValueChanged),
-                RoutingStrategy.Bubble,  // Fixed: Using Bubble instead of Bubbling
-                typeof(RoutedPropertyChangedEventHandler<int>),  // Fixed: Properly typed
+                RoutingStrategy.Bubbling,
+                typeof(RoutedPropertyChangedEventHandler),
                 typeof(QuantityBox));
 
         private int _quantity = 1;

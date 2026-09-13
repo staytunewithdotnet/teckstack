@@ -15,7 +15,8 @@
             
             <Button x:Name="btnDecrease" Grid.Column="0" Content="-" FontSize="16" Click="BtnDecrease_Click"/>
             <TextBox x:Name="txtQuantity" Grid.Column="1" Text="1" TextAlignment="Center" 
-                     TextChanged="TxtQuantity_TextChanged"/>
+                     PreviewTextInput="TxtQuantity_TextChanged" 
+                     DataObject.Pasting="TxtQuantity_TextChanged"/>
             <Button x:Name="btnIncrease" Grid.Column="2" Content="+" FontSize="16" Click="BtnIncrease_Click"/>
         </Grid>
     </Border>
