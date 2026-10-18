@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web"><PropertyGroup><TargetFramework>net9.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><CheckEolWorkloads>false</CheckEolWorkloads></PropertyGroup><ItemGroup><ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" /><ProjectReference Include="..\..\..\ServiceDefaults\ServiceDefaults.csproj" /></ItemGroup><ItemGroup><PackageReference Include="Serilog.AspNetCore" Version="9.0.0" /></ItemGroup></Project>
+
+
+
+
+
