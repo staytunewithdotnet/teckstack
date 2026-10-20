@@ -1,0 +1,1 @@
+namespace BuildingBlocks.Events; public record OrderPlacedEvent(Guid OrderId,int ProductId,int Qty,string CorrelationId,Guid EventId); public record StockReservedEvent(Guid OrderId,int ProductId,int Qty,string CorrelationId); public record StockFailedEvent(Guid OrderId,string Reason,string CorrelationId);
