@@ -1,0 +1,94 @@
+# ============================================================================
+# SQL SERVER: The Database (Filing Cabinet)
+# ============================================================================
+# SQL Server stores all our data:
+# - Orders table (what customers ordered)
+# - OutboxMessage table (messages waiting to be sent)
+# - InboxState table (messages already processed)
+# 
+# WARNING: We use "emptyDir" volume, which means data is LOST if pod restarts.
+# This is FINE for local testing, but NOT for production!
+# ============================================================================
+
+# 1. DEPLOYMENT: The actual SQL Server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver
+  namespace: claim-pattern-demo
+  labels:
+    app: sqlserver
+spec:
+  replicas: 1 # Only need 1 for local testing
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      containers:
+      - name: sqlserver
+        # Official SQL Server 2022 image from Microsoft
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        
+        ports:
+        - containerPort: 1433 # SQL Server listens on port 1433
+          name: sql
+        
+        # SQL Server needs environment variables to accept the license
+        env:
+        - name: ACCEPT_EULA
+          value: "Y" # "I accept the license agreement"
+        - name: MSSQL_SA_PASSWORD
+          value: "YourStrong@Passw0rd!" # SA (admin) password
+          # ^ Must meet complexity: uppercase, lowercase, number, special char
+        
+        # SQL Server needs at least 1GB RAM to start reliably
+        resources:
+          requests:
+            memory: "1Gi"  # Minimum 1GB RAM
+            cpu: "500m"    # 50% of 1 CPU core
+          limits:
+            memory: "2Gi"  # Maximum 2GB RAM
+            cpu: "1000m"   # 1 full CPU core
+        
+        # Mount a volume so SQL Server can write data files
+        volumeMounts:
+        - name: sql-data
+          mountPath: /var/opt/mssql # SQL Server data directory
+        
+        # Health check: Is SQL Server accepting connections?
+        livenessProbe:
+          tcpSocket:
+            port: 1433
+          initialDelaySeconds: 60 # Wait 60s for SQL Server to start (it's slow!)
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 1433
+          initialDelaySeconds: 30 # Wait 30s before checking
+          periodSeconds: 5
+      
+      # Define the volume (temporary storage)
+      volumes:
+      - name: sql-data
+        emptyDir: {} 
+        # ^ WARNING: Data is deleted if pod restarts! Fine for testing.
+        # For production, use: persistentVolumeClaim (PVC)
+
+---
+# 2. SERVICE: How other pods talk to SQL Server
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-service
+  namespace: claim-pattern-demo
+spec:
+  selector:
+    app: sqlserver
+  ports:
+  - name: sql
+    port: 1433       # Service port
+    targetPort: 1433 # Container port

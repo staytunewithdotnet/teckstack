@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SagaApp": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:33084;http://localhost:33085"
+    }
+  }
+}

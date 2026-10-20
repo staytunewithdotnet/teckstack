@@ -1,0 +1,84 @@
+# ============================================================================
+# RABBITMQ: The Message Broker (Post Office)
+# ============================================================================
+# RabbitMQ is like a post office:
+# - Your app gives it letters (messages)
+# - It guarantees delivery to the right recipient
+# - If recipient is busy, it holds the letter in a "queue"
+# 
+# We use RabbitMQ because:
+# 1. It's reliable (messages aren't lost)
+# 2. It supports retries (if processing fails)
+# 3. It has a nice web UI to see what's happening
+# ============================================================================
+
+# 1. DEPLOYMENT: The actual RabbitMQ server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: claim-pattern-demo
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1 # Only need 1 for local testing
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        # Use RabbitMQ 4 with management plugin (web UI)
+        image: rabbitmq:4-management
+        
+        # Expose two ports:
+        ports:
+        - containerPort: 5672  # AMQP port (app talks to RabbitMQ here)
+          name: amqp
+        - containerPort: 15672 # Management UI port (you open this in browser)
+          name: management
+        
+        # Resource limits (prevent RabbitMQ from eating all your RAM)
+        resources:
+          requests:
+            memory: "256Mi" # Minimum 256MB RAM
+            cpu: "250m"     # 25% of 1 CPU core
+          limits:
+            memory: "512Mi" # Maximum 512MB RAM
+            cpu: "500m"     # 50% of 1 CPU core
+        
+        # Health check: Kubernetes checks if RabbitMQ is alive
+        livenessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 30 # Wait 30s before first check
+          periodSeconds: 10       # Check every 10s
+        readinessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 10 # Wait 10s before first check
+          periodSeconds: 5        # Check every 5s
+
+---
+# 2. SERVICE: How other pods talk to RabbitMQ
+# Think of this as a "phone number" for RabbitMQ
+# Other pods use "rabbitmq-service:5672" instead of IP addresses
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-service
+  namespace: claim-pattern-demo
+spec:
+  selector:
+    app: rabbitmq # Routes traffic to pods with label "app: rabbitmq"
+  ports:
+  - name: amqp
+    port: 5672       # Service port (what other pods use)
+    targetPort: 5672 # Container port (where RabbitMQ listens)
+  - name: management
+    port: 15672      # Service port for web UI
+    targetPort: 15672 # Container port for web UI
