@@ -1,0 +1,101 @@
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using MyInvoicingApp.Application.DTOs;
+using MyInvoicingApp.Application.Interfaces;
+
+namespace MyInvoicingApp.Presentation.Services;
+
+public class WpfInvoicePrintService : IPrintService
+{
+    public bool CanPrint => true;
+
+    public Task PrintInvoiceAsync(InvoiceDto invoice)
+    {
+        // Must be on UI thread for PrintDialog
+        var tcs = new TaskCompletionSource<bool>();
+
+        Application.Current.Dispatcher.InvokeAsync(() =>
+        {
+            try
+            {
+                var printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    var doc = CreateFlowDocument(invoice);
+                    doc.PageHeight = printDialog.PrintableAreaHeight;
+                    doc.PageWidth = printDialog.PrintableAreaWidth;
+                    doc.PagePadding = new Thickness(40);
+                    doc.ColumnGap = 0;
+                    doc.ColumnWidth = printDialog.PrintableAreaWidth;
+
+                    IDocumentPaginatorSource idpSource = doc;
+                    printDialog.PrintDocument(idpSource.DocumentPaginator, $"Invoice {invoice.Id}");
+                    tcs.SetResult(true);
+                }
+                else
+                {
+                    tcs.SetResult(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Print failed: {ex.Message}", "Print Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    private static FlowDocument CreateFlowDocument(InvoiceDto invoice)
+    {
+        var doc = new FlowDocument();
+
+        var title = new Paragraph(new Run($"INVOICE #{invoice.Id.ToString().Substring(0,8).ToUpper()}"))
+        { FontSize = 24, FontWeight = FontWeights.Bold, Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkBlue) };
+        doc.Blocks.Add(title);
+
+        doc.Blocks.Add(new Paragraph(new Run($"Date: {invoice.CreatedAt:yyyy-MM-dd HH:mm} | Status: {(invoice.IsPaid ? "PAID" : "PENDING")}")) { FontSize = 11 });
+
+        doc.Blocks.Add(new Paragraph(new Run("Bill To:")) { FontWeight = FontWeights.Bold, Margin = new Thickness(0,20,0,0) });
+        doc.Blocks.Add(new Paragraph(new Run(invoice.CustomerName)) { FontSize = 16, FontWeight = FontWeights.Bold });
+        if (!string.IsNullOrWhiteSpace(invoice.Description))
+            doc.Blocks.Add(new Paragraph(new Run(invoice.Description)));
+
+        var table = new Table();
+        table.Columns.Add(new TableColumn { Width = new GridLength(80) });
+        table.Columns.Add(new TableColumn { Width = new GridLength(1, GridUnitType.Star) });
+        table.Columns.Add(new TableColumn { Width = new GridLength(100) });
+        table.RowGroups.Add(new TableRowGroup());
+
+        var headerRow = new TableRow { Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(240,240,240)) };
+        headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Qty")) { FontWeight = FontWeights.Bold }));
+        headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Description")) { FontWeight = FontWeights.Bold }));
+        headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Amount")) { FontWeight = FontWeights.Bold, TextAlignment = TextAlignment.Right }));
+        table.RowGroups[0].Rows.Add(headerRow);
+
+        var row1 = new TableRow();
+        row1.Cells.Add(new TableCell(new Paragraph(new Run("1"))));
+        row1.Cells.Add(new TableCell(new Paragraph(new Run(invoice.Description ?? invoice.CustomerName))));
+        row1.Cells.Add(new TableCell(new Paragraph(new Run($"{invoice.Amount:N2}")) { TextAlignment = TextAlignment.Right }));
+        table.RowGroups[0].Rows.Add(row1);
+
+        var rowTax = new TableRow();
+        rowTax.Cells.Add(new TableCell(new Paragraph(new Run(""))));
+        rowTax.Cells.Add(new TableCell(new Paragraph(new Run("Tax")) { TextAlignment = TextAlignment.Right, FontWeight = FontWeights.Bold }));
+        rowTax.Cells.Add(new TableCell(new Paragraph(new Run($"{invoice.Tax:N2}")) { TextAlignment = TextAlignment.Right }));
+        table.RowGroups[0].Rows.Add(rowTax);
+
+        var rowTotal = new TableRow { Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(230,240,255)) };
+        rowTotal.Cells.Add(new TableCell(new Paragraph(new Run(""))));
+        rowTotal.Cells.Add(new TableCell(new Paragraph(new Run("Total")) { TextAlignment = TextAlignment.Right, FontWeight = FontWeights.Bold }));
+        rowTotal.Cells.Add(new TableCell(new Paragraph(new Run($"{invoice.Total:N2}")) { TextAlignment = TextAlignment.Right, FontWeight = FontWeights.Bold }));
+        table.RowGroups[0].Rows.Add(rowTotal);
+
+        doc.Blocks.Add(table);
+        doc.Blocks.Add(new Paragraph(new Run("Thank you for your business! Generated by MyInvoicingApp - Clean Architecture")) { FontStyle = FontStyles.Italic, FontSize = 10, Margin = new Thickness(0,30,0,0) });
+
+        return doc;
+    }
+}

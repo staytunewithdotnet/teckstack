@@ -1,0 +1,18 @@
+{
+  "UserConfig": {
+    "Namespaces": [
+      {
+        "Name": "sb-emulator-ns",
+        "Queues": [
+          {
+            "Name": "ticket-processing",
+            "Properties": {
+              "DeadLetteringOnMessageExpiration": true,
+              "MaxDeliveryCount": 3
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

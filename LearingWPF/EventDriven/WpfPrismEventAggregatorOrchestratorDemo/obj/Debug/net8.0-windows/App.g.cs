@@ -51,7 +51,7 @@ namespace WpfPrismEventAggregatorDemo {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.10.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.13.0")]
         public static void Main() {
             WpfPrismEventAggregatorDemo.App app = new WpfPrismEventAggregatorDemo.App();
             app.Run();

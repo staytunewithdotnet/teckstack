@@ -1,0 +1,10 @@
+services:
+  servicebus-emulator:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    container_name: sb-emulator
+    ports:
+      - "5672:5672"
+    volumes:
+      - ./deploy/emulator-config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
+    environment:
+      - ACCEPT_EULA=Y

@@ -1,0 +1,102 @@
+# ============================================================================
+# SAGA APP: Your .NET Application (3 Replicas to Prove It Works)
+# ============================================================================
+# This is YOUR application that processes orders.
+# We run 3 copies (replicas) to FORCE a race condition:
+# - All 3 pods will try to claim the same order at the same time
+# - The Claim Pattern ensures only ONE pod succeeds
+# ============================================================================
+
+# 1. DEPLOYMENT: 3 replicas of your app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saga-app
+  namespace: claim-pattern-demo
+  labels:
+    app: saga-app
+spec:
+  replicas: 3 # KEY: 3 pods will compete for orders (proves the pattern works!)
+  selector:
+    matchLabels:
+      app: saga-app
+  template:
+    metadata:
+      labels:
+        app: saga-app
+    spec:
+      containers:
+      - name: saga-app
+        # We build this image locally (see Dockerfile)
+        image: saga-app:latest
+        imagePullPolicy: Never # Use local image, don't pull from Docker Hub
+        
+        ports:
+        - containerPort: 8080 # App listens on port 8080
+          name: http
+        
+        # Environment variables injected into the app
+        env:
+        # POD_NAME: Kubernetes injects the actual pod name (e.g., "saga-app-abc123")
+        # Your app uses this to identify itself in the LockedBy column
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name # Dynamically gets pod name
+        
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development" # Tells .NET to use Development config
+        
+        # Connection string to SQL Server (uses K8s service name)
+        - name: ConnectionStrings__sagadb
+          value: "Server=sqlserver-service,1433;Database=SagaDb;User Id=sa;Password=YourStrong@Passw0rd!;TrustServerCertificate=True;Encrypt=False;"
+          #          ^^^^^^^^^^^^^^^^^^^^
+          #          This is the K8s service name (not localhost!)
+          #          Kubernetes DNS resolves this to the SQL Server pod IP
+        
+        # Connection string to RabbitMQ (uses K8s service name)
+        - name: ConnectionStrings__rabbitmq
+          value: "amqp://guest:guest@rabbitmq-service:5672"
+          #          ^^^^^^^^^^^^^^^^^^^^
+          #          RabbitMQ K8s service name
+        
+        resources:
+          requests:
+            memory: "128Mi" # Minimum 128MB RAM
+            cpu: "100m"     # 10% of 1 CPU core
+          limits:
+            memory: "256Mi" # Maximum 256MB RAM
+            cpu: "200m"     # 20% of 1 CPU core
+        
+        # Health check: Is the app responding to HTTP requests?
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15 # Wait 15s for app to start
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5 # Wait 5s before checking
+          periodSeconds: 5
+
+---
+# 2. SERVICE: Expose app to your laptop (NodePort)
+# NodePort means: "Open a port on your laptop that routes to the pods"
+apiVersion: v1
+kind: Service
+metadata:
+  name: saga-app-service
+  namespace: claim-pattern-demo
+spec:
+  type: NodePort # Exposes port on your laptop
+  selector:
+    app: saga-app
+  ports:
+  - name: http
+    port: 8080       # Service port
+    targetPort: 8080 # Pod port
+    nodePort: 30080  # YOUR laptop port! Access via http://localhost:30080
+    # ^ You can access the app from your browser at http://localhost:30080

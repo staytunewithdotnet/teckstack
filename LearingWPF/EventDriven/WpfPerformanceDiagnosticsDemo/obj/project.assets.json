@@ -44,6 +44,9 @@
         "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.51": {},
         "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.52": {},
         "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.58": {},
+        "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.59": {},
+        "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.62": {},
+        "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.64": {},
         "C:\\AppCodeStore\\DRL\\LocalPackages\\OnTerra.MapsControl.UWP.1.0.8": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
@@ -67,7 +70,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.400"
     },
     "frameworks": {
       "net8.0-windows": {
@@ -92,7 +95,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

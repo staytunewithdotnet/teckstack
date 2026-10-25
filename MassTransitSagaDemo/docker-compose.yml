@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # RabbitMQ with Management UI
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: masstransit-rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - masstransit-network
+
+  # SQL Server (for development/testing)
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: masstransit-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
+      MSSQL_PID: Developer
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'YourStrong@Passw0rd' -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - masstransit-network
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  sqlserver_data:
+    driver: local
+
+networks:
+  masstransit-network:
+    driver: bridge

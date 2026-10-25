@@ -9,7 +9,7 @@ using WpfMediatRLearningApp.ViewModels;
 namespace WpfMediatRLearningApp
 {
     /// <summary>
-    /// Section 5.11: Configures the Host, registers Services, MediatR, and Behaviors.
+    /// Section 5.11: Configures the Host, registers Services, and MediatR.
     /// </summary>
     public partial class App : Application
     {

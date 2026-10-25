@@ -1,0 +1,11 @@
+# ============================================================================
+# NAMESPACE: Isolated Environment
+# ============================================================================
+# Think of a namespace as a "folder" in Kubernetes. 
+# Everything we deploy will be in this folder, keeping it separate from other apps.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: claim-pattern-demo
+  labels:
+    app.kubernetes.io/part-of: claim-pattern-demo

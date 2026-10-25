@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TemperatureSensorSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69b7c3ef49b4f23c84a11c9b0baa1c01dbc5bd6c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fa8766df858d4a8177e02993ca5fc23cd1f128f")]
 [assembly: System.Reflection.AssemblyProductAttribute("TemperatureSensorSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TemperatureSensorSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

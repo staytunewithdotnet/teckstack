@@ -1,0 +1,76 @@
+<Window x:Class="MyInvoicingApp.Presentation.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MyInvoicingApp - Clean Architecture WPF (.NET 8 + Real SQLite)" Height="650" Width="1050"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Grid.Row="0" LastChildFill="False" Margin="0,0,0,10">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Invoice Manager" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="{Binding DbPath, StringFormat='DB: {0}'}" FontSize="10" Foreground="Gray" TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Content="New Invoice" Command="{Binding OpenCreateWindowCommand}" Background="#2563EB" Foreground="White" FontWeight="Bold"/>
+                <Button Content="Refresh" Command="{Binding LoadCommand}"/>
+                <Button Content="Export CSV" Command="{Binding ExportCommand}"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Search -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Padding="6" >
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush Stretch="None" AlignmentX="Left">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="Search by customer name..." Foreground="Gray" Margin="4,0,0,0"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Grid.Column="1" Content="Search" Command="{Binding SearchCommand}" Margin="6,0,0,0"/>
+            <Button Grid.Column="2" Content="Delete Selected" Command="{Binding DeleteCommand}" Background="#DC2626" Foreground="White" Margin="6,0,0,0"/>
+        </Grid>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Invoices}" SelectedItem="{Binding SelectedInvoice}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" GridLinesVisibility="Horizontal"
+                  AlternatingRowBackground="#F8FAFC">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat=N2}" Width="100"/>
+                <DataGridTextColumn Header="Tax" Binding="{Binding Tax, StringFormat=N2}" Width="80"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=N2}" Width="100"/>
+                <DataGridTextColumn Header="Created" Binding="{Binding CreatedAt, StringFormat=yyyy-MM-dd HH:mm}" Width="140"/>
+                <DataGridCheckBoxColumn Header="Paid" Binding="{Binding IsPaid}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StatusBar Grid.Row="3" Margin="0,8,0,0">
+            <TextBlock Text="{Binding Status}" />
+        </StatusBar>
+    </Grid>
+</Window>

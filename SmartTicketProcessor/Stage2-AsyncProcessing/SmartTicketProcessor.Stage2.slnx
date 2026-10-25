@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SmartTicket.Api/SmartTicket.Api.csproj" />
+  <Project Path="SmartTicket.Contracts/SmartTicket.Contracts.csproj" />
+  <Project Path="SmartTicket.Worker/SmartTicket.Worker.csproj" />
+</Solution>
