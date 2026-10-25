@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using SmartTicket.Contracts.Events;
+using SmartTicket.Worker.Models;
+using SmartTicket.Worker.Repositories;
 using SmartTicket.Worker.Services;
 
 namespace SmartTicket.Worker;
@@ -9,12 +11,14 @@ public sealed class TicketProcessingWorker : BackgroundService
 {
     private readonly ServiceBusProcessor _processor;
     private readonly ITicketAnalyzer _analyzer;
+    private readonly ITicketAnalysisRepository _repository;
     private readonly ILogger<TicketProcessingWorker> _logger;
 
     public TicketProcessingWorker(
         string connectionString, 
         string queueName, 
         ITicketAnalyzer analyzer,
+        ITicketAnalysisRepository repository,
         ILogger<TicketProcessingWorker> logger)
     {
         var options = new ServiceBusClientOptions
@@ -33,6 +37,7 @@ public sealed class TicketProcessingWorker : BackgroundService
 
         _processor = client.CreateProcessor(queueName, processorOptions);
         _analyzer = analyzer;
+        _repository = repository;
         _logger = logger;
 
         _processor.ProcessMessageAsync += ProcessMessageAsync;
@@ -42,6 +47,10 @@ public sealed class TicketProcessingWorker : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Starting Service Bus Processor...");
+        
+        // Initialize Cosmos DB (create database and container if needed)
+        await _repository.InitializeAsync(stoppingToken);
+        
         await _processor.StartProcessingAsync(stoppingToken);
         
         // Keep the worker running until the host is stopped
@@ -69,9 +78,24 @@ public sealed class TicketProcessingWorker : BackgroundService
             // 1. Call Azure AI
             var analysis = await _analyzer.AnalyzeAsync(@event.Title, @event.Description, args.CancellationToken);
 
-            _logger.LogInformation("AI Analysis Complete for {TicketId}: {Category} / {Priority}", ticketId, analysis.Category, analysis.Priority);
+            _logger.LogInformation("AI Analysis Complete for {TicketId}: {Category} / {Priority}", 
+                ticketId, analysis.Category, analysis.Priority);
             
-            // TODO (Stage 5): Save 'analysis' to Cosmos DB here
+            // 3. Create document for Cosmos DB
+            var document = TicketAnalysisDocument.FromEventAndAnalysis(
+                eventId: args.Message.MessageId ?? Guid.NewGuid().ToString(),
+                ticketId: ticketId,
+                customerId: @event.CustomerId,
+                title: @event.Title,
+                description: @event.Description,
+                analysis: analysis
+            );
+
+            // 4. Save to Cosmos DB
+            await _repository.SaveAsync(document, args.CancellationToken);
+            
+            _logger.LogInformation("Saved analysis to Cosmos DB for TicketId: {TicketId}, CustomerId: {CustomerId}", 
+                ticketId, @event.CustomerId);
 
             // 5. COMPLETE THE MESSAGE (Removes it from the queue)
             await args.CompleteMessageAsync(args.Message, args.CancellationToken);
@@ -103,6 +127,13 @@ public sealed class TicketProcessingWorker : BackgroundService
         _logger.LogInformation("Stopping Service Bus Processor...");
         await _processor.StopProcessingAsync(cancellationToken);
         await _processor.DisposeAsync();
+        
+        // Dispose Cosmos DB client
+        if (_repository is IAsyncDisposable asyncDisposable)
+        {
+            await asyncDisposable.DisposeAsync();
+        }
+        
         await base.StopAsync(cancellationToken);
     }
 }
