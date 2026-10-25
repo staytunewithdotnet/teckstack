@@ -1,8 +1,8 @@
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using SmartTicket.Contracts.Events;
-using SmartTicket.Worker.Models;
-using SmartTicket.Worker.Repositories;
+using SmartTicket.Contracts.Models;
+using SmartTicket.Infrastructure.Repositories;
 using SmartTicket.Worker.Services;
 
 namespace SmartTicket.Worker;
@@ -11,14 +11,14 @@ public sealed class TicketProcessingWorker : BackgroundService
 {
     private readonly ServiceBusProcessor _processor;
     private readonly ITicketAnalyzer _analyzer;
-    private readonly ITicketAnalysisRepository _repository;
+    private readonly ITicketRepository _repository;
     private readonly ILogger<TicketProcessingWorker> _logger;
 
     public TicketProcessingWorker(
         string connectionString, 
         string queueName, 
         ITicketAnalyzer analyzer,
-        ITicketAnalysisRepository repository,
+        ITicketRepository repository,
         ILogger<TicketProcessingWorker> logger)
     {
         var options = new ServiceBusClientOptions
@@ -47,10 +47,6 @@ public sealed class TicketProcessingWorker : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Starting Service Bus Processor...");
-        
-        // Initialize Cosmos DB (create database and container if needed)
-        await _repository.InitializeAsync(stoppingToken);
-        
         await _processor.StartProcessingAsync(stoppingToken);
         
         // Keep the worker running until the host is stopped
@@ -75,31 +71,60 @@ public sealed class TicketProcessingWorker : BackgroundService
                 return;
             }
 
-            // 1. Call Azure AI
+            // 2. Get current ticket state (to get the ETag)
+            var ticket = await _repository.GetByIdAsync(ticketId, @event.CustomerId, args.CancellationToken);
+            if (ticket is null)
+            {
+                _logger.LogWarning("Ticket {Id} not found. Creating new ticket.", ticketId);
+                
+                // Create a new ticket if it doesn't exist
+                var newTicket = new Ticket(
+                    Id: ticketId,
+                    CustomerId: @event.CustomerId,
+                    Title: @event.Title,
+                    Description: @event.Description,
+                    Status: TicketStatus.Submitted,
+                    CreatedAt: DateTimeOffset.UtcNow
+                );
+                
+                await _repository.CreateAsync(newTicket, args.CancellationToken);
+                ticket = newTicket;
+            }
+            
+            // Check if already completed (idempotency check)
+            if (ticket.Status == TicketStatus.Completed)
+            {
+                _logger.LogInformation("Ticket {Id} already completed. Completing message.", ticketId);
+                await args.CompleteMessageAsync(args.Message, args.CancellationToken);
+                return;
+            }
+
+            // 3. Call Azure AI
             var analysis = await _analyzer.AnalyzeAsync(@event.Title, @event.Description, args.CancellationToken);
 
             _logger.LogInformation("AI Analysis Complete for {TicketId}: {Category} / {Priority}", 
                 ticketId, analysis.Category, analysis.Priority);
             
-            // 3. Create document for Cosmos DB
-            var document = TicketAnalysisDocument.FromEventAndAnalysis(
-                eventId: args.Message.MessageId ?? Guid.NewGuid().ToString(),
-                ticketId: ticketId,
-                customerId: @event.CustomerId,
-                title: @event.Title,
-                description: @event.Description,
-                analysis: analysis
-            );
+            // 4. Update Cosmos DB with Optimistic Concurrency
+            var updated = await _repository.TryUpdateAnalysisAsync(
+                ticketId, 
+                @event.CustomerId, 
+                ticket.ETag, 
+                analysis, 
+                args.CancellationToken);
 
-            // 4. Save to Cosmos DB
-            await _repository.SaveAsync(document, args.CancellationToken);
-            
-            _logger.LogInformation("Saved analysis to Cosmos DB for TicketId: {TicketId}, CustomerId: {CustomerId}", 
-                ticketId, @event.CustomerId);
-
-            // 5. COMPLETE THE MESSAGE (Removes it from the queue)
-            await args.CompleteMessageAsync(args.Message, args.CancellationToken);
-            _logger.LogInformation("Successfully processed and completed message for TicketId: {TicketId}", ticketId);
+            if (updated)
+            {
+                _logger.LogInformation("Successfully updated TicketId: {TicketId} with AI analysis", ticketId);
+                await args.CompleteMessageAsync(args.Message, args.CancellationToken);
+            }
+            else
+            {
+                // If false, it was a concurrency conflict. The message was already processed.
+                // We safely complete it to remove it from the queue.
+                _logger.LogWarning("Concurrency conflict for {TicketId}. Message was already processed. Safely completing.", ticketId);
+                await args.CompleteMessageAsync(args.Message, args.CancellationToken);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -110,7 +135,7 @@ public sealed class TicketProcessingWorker : BackgroundService
         {
             _logger.LogError(ex, "Failed to process message for TicketId: {TicketId}", ticketId);
             
-            // Abandoning releases the lock, allowing the message to be retried immediately
+            // Abandoning releases the lock, allowing the message to be retried
             await args.AbandonMessageAsync(args.Message, cancellationToken: args.CancellationToken);
         }
     }
@@ -127,13 +152,6 @@ public sealed class TicketProcessingWorker : BackgroundService
         _logger.LogInformation("Stopping Service Bus Processor...");
         await _processor.StopProcessingAsync(cancellationToken);
         await _processor.DisposeAsync();
-        
-        // Dispose Cosmos DB client
-        if (_repository is IAsyncDisposable asyncDisposable)
-        {
-            await asyncDisposable.DisposeAsync();
-        }
-        
         await base.StopAsync(cancellationToken);
     }
 }

@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="SmartTicket.Contracts/SmartTicket.Contracts.csproj" />
-  <Project Path="SmartTicket.Worker/SmartTicket.Worker.csproj" />
-</Solution>

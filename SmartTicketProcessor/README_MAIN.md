@@ -24,6 +24,11 @@ This is a **step-by-step learning project** that teaches modern .NET architectur
    - Azure OpenAI, Structured Outputs, DefaultAzureCredential
    - Master AI integration
 
+4. **[Stage 5: Azure Cosmos DB](Stage5-CosmosDB/README.md)** (Advanced, 4-5 hours)
+   - Cosmos DB with Point Reads, Optimistic Concurrency (ETags)
+   - Clean architecture (SmartTicket.Infrastructure project)
+   - Production-grade NoSQL persistence
+
 ## 🗂️ Project Structure
 
 ```
@@ -60,17 +65,33 @@ SmartTicketProcessor/
 │   ├── SmartTicket.Worker/     # Background processor
 │   └── SmartTicketProcessor.Stage2.slnx
 │
-└── 🎓 Stage 4: Azure AI
-    ├── README.md               # Stage 4 learning guide
-    ├── QUICK_REFERENCE_STAGE4.md # Quick reference
-    ├── STAGE4_CONFIGURATION.md # Azure setup guide
-    ├── STAGE4_COMPLETION_SUMMARY.md # Completion summary
-    ├── SmartTicket.Contracts/  # AI output schema
-    ├── SmartTicket.Worker/     # Worker with AI analyzer
-    └── SmartTicketProcessor.Stage4.slnx
+├── 🎓 Stage 4: Azure AI
+│   ├── README.md               # Stage 4 learning guide
+│   ├── QUICK_REFERENCE_STAGE4.md # Quick reference
+│   ├── STAGE4_CONFIGURATION.md # Azure setup guide
+│   ├── STAGE4_COMPLETION_SUMMARY.md # Completion summary
+│   ├── SmartTicket.Contracts/  # AI output schema
+│   ├── SmartTicket.Worker/     # Worker with AI analyzer
+│   └── SmartTicketProcessor.Stage4.slnx
+│
+── 🎓 Stage 5: Azure Cosmos DB
+│   ├── README.md               # Stage 5 learning guide
+│   ├── QUICK_REFERENCE_STAGE5.md # Quick reference
+│   ├── STAGE5_CONFIGURATION.md # Setup instructions
+│   ├── STAGE5_COMPLETION_SUMMARY.md # Completion summary
+│   ├── docker-compose.yml      # SB + Cosmos DB emulators
+│   ├── deploy/                 # Emulator configuration
+│   ├── SmartTicket.Contracts/  # Shared contracts (with Ticket model)
+│   └── SmartTicket.Worker/     # Worker with Cosmos DB integration
+│
+└──  SmartTicket.Infrastructure (Shared)
+    ├── Repositories/
+    │   ├── ITicketRepository.cs        # Repository interface
+    │   └── CosmosDbTicketRepository.cs # Cosmos DB implementation
+    └── SmartTicket.Infrastructure.csproj
 ```
 
-**✅ Clean Structure:** Root contains only navigation docs. All code and stage-specific files are in subfolders.
+**✅ Clean Structure:** Root contains only navigation docs. All code and stage-specific files are in subfolders. The `SmartTicket.Infrastructure` project is shared across stages for infrastructure concerns.
 
 ## 🎯 How to Use This Repository
 
@@ -88,6 +109,10 @@ cd ../Stage2-AsyncProcessing
 # Week 3: Add AI capabilities
 cd ../Stage4-AzureAI
 # See how AI replaces simulated processing
+
+# Week 4: Add production database
+cd ../Stage5-CosmosDB
+# Learn Cosmos DB with optimistic concurrency
 ```
 
 ### For Targeted Learning
@@ -96,6 +121,7 @@ Jump to any stage based on what you want to learn:
 - Need API fundamentals? → **Stage 1**
 - Want message queues? → **Stage 2**
 - Ready for AI? → **Stage 4**
+- Want production database? → **Stage 5**
 
 ## ✅ All Stages Build Successfully
 
@@ -103,6 +129,8 @@ Jump to any stage based on what you want to learn:
 ✓ Stage 1: Build succeeded in 15.7s
 ✓ Stage 2: Build succeeded in 16.3s
 ✓ Stage 4: Build succeeded in 7.9s
+✓ Stage 5: Build succeeded in 11.6s
+✓ SmartTicket.Infrastructure: Build succeeded in 4.0s
 ```
 
 ## 💡 Why This Structure?
@@ -143,6 +171,15 @@ cd Stage4-AzureAI/SmartTicket.Worker
 dotnet run
 ```
 
+### Option 4: Want Production Database
+```bash
+cd Stage5-CosmosDB
+docker-compose up -d  # Start SB + Cosmos DB emulators
+cd SmartTicket.Worker
+# Configure Azure OpenAI first (see README)
+dotnet run
+```
+
 ## 🎓 What You'll Learn
 
 ### After Stage 1
@@ -163,6 +200,13 @@ dotnet run
 ✅ Implement DefaultAzureCredential  
 ✅ Handle graceful shutdown with CancellationToken  
 
+### After Stage 5
+✅ Implement production-grade Cosmos DB integration  
+✅ Use Point Reads for ultra-fast data access (< 10ms)  
+✅ Handle duplicate messages with Optimistic Concurrency (ETags)  
+✅ Design efficient partition keys (/customerId)  
+✅ Build clean architecture with SmartTicket.Infrastructure  
+
 ## 📊 Learning Timeline
 
 | Stage | Time | Difficulty | Prerequisites |
@@ -170,8 +214,9 @@ dotnet run
 | Stage 1 | 2-3 hours | Beginner | Basic C# |
 | Stage 2 | 3-4 hours | Intermediate | Stage 1 |
 | Stage 4 | 4-5 hours | Advanced | Stages 1 & 2, Azure subscription |
+| Stage 5 | 4-5 hours | Advanced | Stages 1, 2 & 4 |
 
-**Total:** 9-12 hours to complete all stages
+**Total:** 13-17 hours to complete all stages
 
 ## 🆘 Need Help?
 

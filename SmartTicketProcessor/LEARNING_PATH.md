@@ -5,9 +5,12 @@ Welcome! This project is designed to teach you modern .NET architecture **step-b
 ## 🗺️ Learning Path Overview
 
 ```
-Stage 1 → Stage 2 → Stage 4
-(Local API) (Async) (Azure AI)
+Stage 1 → Stage 2 → Stage 4 → Stage 5
+(Local API) (Async) (Azure AI) (Cosmos DB)
 ```
+
+**Total Time:** 13-17 hours to complete all stages  
+**Prerequisites:** Basic C# knowledge, Docker Desktop, Azure subscription (for Stages 4 & 5)
 
 ## 📚 Stages
 
@@ -76,6 +79,34 @@ Learn AI integration:
 - `STAGE4_COMPLETION_SUMMARY.md` - Completion summary
 
 **Start here if:** You're comfortable with async and want to add AI.
+
+---
+
+### ✅ [Stage 5: Azure Cosmos DB Integration](Stage5-CosmosDB/README.md)
+**Complexity:** Advanced | **Time:** 4-5 hours  
+**Prerequisites:** Stages 1, 2 & 4 complete  
+**Location:** `SmartTicketProcessor/Stage5-CosmosDB/`
+
+Learn production-grade NoSQL persistence:
+- Azure Cosmos DB with Point Reads (< 10ms latency)
+- Optimistic Concurrency (ETags) for duplicate message handling
+- Partition Key design (/customerId)
+- Keyless authentication (DefaultAzureCredential)
+- Clean architecture (SmartTicket.Infrastructure project)
+
+**Documentation in Stage 5 folder:**
+- `README.md` - Learning guide
+- `QUICK_REFERENCE_STAGE5.md` - Quick reference
+- `STAGE5_CONFIGURATION.md` - Setup instructions
+- `STAGE5_COMPLETION_SUMMARY.md` - Completion summary
+- `docker-compose.yml` - Service Bus + Cosmos DB emulators
+
+**New Project:**
+- `SmartTicket.Infrastructure/` - Dedicated infrastructure layer
+  - `Repositories/ITicketRepository.cs` - Repository interface
+  - `Repositories/CosmosDbTicketRepository.cs` - Cosmos DB implementation
+
+**Start here if:** You want to learn production database patterns and clean architecture.
 
 ---
 

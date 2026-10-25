@@ -14,9 +14,11 @@
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.63.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SmartTicket.Contracts\SmartTicket.Contracts.csproj" />
+    <ProjectReference Include="..\..\SmartTicket.Infrastructure\SmartTicket.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 using Azure.Identity;
+using SmartTicket.Infrastructure.Repositories;
 using SmartTicket.Worker;
-using SmartTicket.Worker.Repositories;
 using SmartTicket.Worker.Services;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -16,23 +16,23 @@ var aiEndpoint = builder.Configuration.GetValue<string>("AzureOpenAI:Endpoint")
 var aiDeploymentName = builder.Configuration.GetValue<string>("AzureOpenAI:DeploymentName") 
     ?? throw new InvalidOperationException("AzureOpenAI:DeploymentName is required.");
 
-// Azure Cosmos DB Configuration
-var cosmosConnectionString = builder.Configuration.GetValue<string>("CosmosDB:ConnectionString") 
-    ?? throw new InvalidOperationException("CosmosDB:ConnectionString is required.");
-var cosmosDatabaseName = builder.Configuration.GetValue<string>("CosmosDB:DatabaseName") ?? "SmartTicketDB";
-var cosmosContainerName = builder.Configuration.GetValue<string>("CosmosDB:ContainerName") ?? "TicketAnalyses";
+// Azure Cosmos DB Configuration (Updated to use keyless auth)
+var cosmosEndpoint = builder.Configuration.GetValue<string>("CosmosDb:AccountEndpoint") 
+    ?? "https://localhost:8081"; // Default local emulator endpoint
+var cosmosDatabase = builder.Configuration.GetValue<string>("CosmosDb:DatabaseName") ?? "SmartTicketDb";
+var cosmosContainer = builder.Configuration.GetValue<string>("CosmosDb:ContainerName") ?? "Tickets";
 
 // Register the AI Analyzer (uses DefaultAzureCredential internally)
 builder.Services.AddSingleton<ITicketAnalyzer>(sp => 
     new OpenAiTicketAnalyzer(aiEndpoint, aiDeploymentName, sp.GetRequiredService<ILogger<OpenAiTicketAnalyzer>>()));
 
-// Register the Cosmos DB Repository
-builder.Services.AddSingleton<ITicketAnalysisRepository>(sp => 
-    new CosmosDbTicketAnalysisRepository(
-        cosmosConnectionString,
-        cosmosDatabaseName,
-        cosmosContainerName,
-        sp.GetRequiredService<ILogger<CosmosDbTicketAnalysisRepository>>()
+// Register the Cosmos DB Repository with DefaultAzureCredential (keyless auth)
+builder.Services.AddSingleton<ITicketRepository>(sp => 
+    new CosmosDbTicketRepository(
+        cosmosEndpoint,
+        cosmosDatabase,
+        cosmosContainer,
+        sp.GetRequiredService<ILogger<CosmosDbTicketRepository>>()
     ));
 
 // Register the Worker with all dependencies
@@ -41,7 +41,7 @@ builder.Services.AddHostedService(sp =>
         serviceBusConnectionString, 
         queueName, 
         sp.GetRequiredService<ITicketAnalyzer>(),
-        sp.GetRequiredService<ITicketAnalysisRepository>(), // <-- Injected
+        sp.GetRequiredService<ITicketRepository>(), // <-- Updated to use Infrastructure repository
         sp.GetRequiredService<ILogger<TicketProcessingWorker>>()
     ));
 
